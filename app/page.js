@@ -38,7 +38,8 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-row items-center justify-center gap-8 bg-gray-700">
-      {/* this is the frame that gets captured */}
+      {/* this div gets rendered at dounload */}
+      {/* your image */}
       <div ref={frameRef} className="relative h-[512px] w-[512px] overflow-hidden">
 
         <img
@@ -46,7 +47,7 @@ export default function Home() {
           alt="Background"
           className="absolute inset-0 w-full h-full object-cover shadow-6xl rounded-3xl"
         />
-
+        {/* your image */}
         <div className="absolute inset-0 z-10 flex items-center justify-center p-12">
           <img
             src="/image.png"

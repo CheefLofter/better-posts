@@ -22,6 +22,8 @@ npm run dev
 
 Place images in `public` folder.(for now)
 
+currently  no upload button will be here soon. drop images in public folder and use in code where mentiond
+
 ## Roadmap
 
 ### Upload & Download
