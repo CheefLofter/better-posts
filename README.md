@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/resources/ReadmeImage.png" alt="Image Frame Generator" width="200"/>
+  <img src="/resources/ReadmeImage.png" alt="Image Frame Generator" width="vh"/>
   <h1>Image Frame Generator</h1>
   
   <p>
