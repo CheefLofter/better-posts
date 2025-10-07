@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/public/next.svg" alt="Image Frame Generator" width="200"/>
+  <img src="/resources/ReadmeImage.png" alt="Image Frame Generator" width="200"/>
   <h1>Image Frame Generator</h1>
   
   <p>
@@ -24,12 +24,10 @@ Place images in `public` folder.(for now)
 
 currently  no upload button will be here soon. drop images in public folder and use in code where mentiond
 
-## Roadmap
+## Todo
 
-### Upload & Download
-- Drag-and-drop upload
-- Multiple format support
-- High-quality download (PNG/JPG)
+- allow user to choose the aspect ratio of the abckground
 
-- a good background collection to choose from
+- give the project/tool an name.
+
 

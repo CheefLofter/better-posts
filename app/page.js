@@ -119,7 +119,7 @@ export default function Home() {
         {/* Optional: Background selector */}
         <div className="mt-4">
           <p className="text-white mb-2 text-center">Select Background:</p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-center allign-center">
             <button
               onClick={() => setSelectedBackground('/backgrounds/background-1.jpg')}
               className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
