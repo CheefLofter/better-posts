@@ -6,10 +6,11 @@ import { useRef, useState } from 'react';
 export default function Home() {
   const frameRef = useRef(null);
   const fileInputRef = useRef(null);
+  const downloadInputRef = useRef(null);
   
   // State to store the uploaded image URL
-  const [uploadedImage, setUploadedImage] = useState('/image.png');
-  const [selectedBackground, setSelectedBackground] = useState('/backgrounds/background-2.jpg');
+  const [uploadedImage, setUploadedImage] = useState('/placeholder-white.png');
+  const [selectedBackground, setSelectedBackground] = useState('/placeholder-white.png');
 
   const handleDownload = async () => {
     if (frameRef.current) {
@@ -48,6 +49,17 @@ export default function Home() {
       // Create object URL for the uploaded file
       const imageUrl = URL.createObjectURL(file);
       setUploadedImage(imageUrl);
+    } else {
+      alert('Please upload a valid image file');
+    }
+  };
+
+  const handleBackgroundUpload = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      // Create object URL for the uploaded file
+      const backgroundUrl = URL.createObjectURL(file);
+      setSelectedBackground(backgroundUrl);
     } else {
       alert('Please upload a valid image file');
     }
@@ -126,7 +138,22 @@ export default function Home() {
             >
               BG 3
             </button>
+            
           </div>
+          {/* File input (hidden) */}
+        <input 
+          ref={downloadInputRef} 
+          type="file" 
+          accept="image/*"
+          onChange={handleBackgroundUpload}
+          className="hidden" 
+        />
+          <button
+          onClick={() => downloadInputRef.current?.click()}
+          className="px-6 py-3 m-3.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium w-64"
+        >
+          Custom Background
+        </button>
         </div>
       </div>
     </div>
