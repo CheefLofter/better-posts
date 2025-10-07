@@ -20,14 +20,13 @@ npm install
 npm run dev
 ```
 
-Place images in `public` folder.(for now)
 
-currently  no upload button will be here soon. drop images in public folder and use in code where mentiond
 
-## Todo
 
-- allow user to choose the aspect ratio of the abckground
 
-- give the project/tool an name.
+
+
+
+
 
 
