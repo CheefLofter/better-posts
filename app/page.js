@@ -71,26 +71,13 @@ export default function Home() {
     }
   };
 
-  // GitHub Link Component
-  const GitHubLink = () => (
-    <a
-      href="https://github.com/your-username"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 opacity-70 hover:opacity-100 transition-opacity"
-      aria-label="View source on GitHub"
-    >
-      <div className="flex flex-col items-center">
-        <FaGithub className="text-slate-400 hover:text-slate-200" size={28} />
-        <span className="text-xs text-slate-400 hover:text-slate-200 mt-1 font-mono">github</span>
-      </div>
-    </a>
-  );
+  
 
   // Mobile view
   if (isMobileView) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col">
+        <Navbar />
         <div className="flex-1 flex items-center justify-center p-4">
           <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
             <div className="bg-slate-700/50 border-2 border-dashed border-slate-600 rounded-xl w-16 h-16 mx-auto mb-6 flex items-center justify-center">
@@ -105,7 +92,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <GitHubLink />
+        
       </div>
     );
   }
@@ -225,7 +212,7 @@ export default function Home() {
         </div>
       </div>
       
-      <GitHubLink />
+      
       
       {/* Hidden file inputs */}
       <input

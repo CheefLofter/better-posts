@@ -37,7 +37,7 @@ const Navbar = () => {
                     >
                         <span className="text-2xl font-space-grotesk font-bold text-white/90 transition-colors group-hover:text-white">
                             BetterPost
-                            <span className="inline-block ml-1 text-white/70 group-hover:text-white/90 transition-colors">AI</span>
+                            
                         </span>
                         {/* Subtle hover effect */}
                         <div className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[1px] bg-white/20 transition-all duration-300"></div>

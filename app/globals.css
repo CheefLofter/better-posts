@@ -1,3 +1,19 @@
 @import "tailwindcss";
 
 
+
+
+@layer base {
+  :root {
+    --font-geist-sans: var(--font-space-grotesk);
+    --font-geist-mono: var(--font-jetbrains-mono);
+  }
+  
+  body {
+    font-family: var(--font-space-grotesk), sans-serif;
+  }
+  
+  .font-mono {
+    font-family: var(--font-jetbrains-mono), monospace;
+  }
+}
