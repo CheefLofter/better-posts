@@ -4,6 +4,8 @@ import domtoimage from 'dom-to-image';
 import { useRef, useState, useEffect } from 'react';
 import { FaGithub, FaImage, FaDownload, FaUpload } from 'react-icons/fa';
 
+import Navbar from '../components/Navbar';
+
 export default function Home() {
   const frameRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -111,8 +113,13 @@ export default function Home() {
   // Desktop view
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col ">
+       <Navbar />
+      
       <div className="flex-1 flex items-center justify-center p-6 ">
+       
         <div className="flex gap-8 w-full max-w-7xl align-center">
+          
+          
           {/* Preview Frame */}
           <div className="flex-1 flex justify-center ">
             <div
@@ -219,6 +226,22 @@ export default function Home() {
       </div>
       
       <GitHubLink />
+      
+      {/* Hidden file inputs */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFileUpload}
+        className="hidden"
+      />
+      <input
+        ref={downloadInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleBackgroundUpload}
+        className="hidden"
+      />
     </div>
   );
 }
