@@ -2,26 +2,21 @@
 
 import domtoimage from 'dom-to-image';
 import { useRef, useState, useEffect } from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaImage, FaDownload, FaUpload } from 'react-icons/fa';
 
 export default function Home() {
   const frameRef = useRef(null);
   const fileInputRef = useRef(null);
   const downloadInputRef = useRef(null);
-
-  // State to store the uploaded image URL
+  
   const [uploadedImage, setUploadedImage] = useState('/placeholder-white.png');
   const [selectedBackground, setSelectedBackground] = useState('/placeholder-white.png');
   const [height, setHeight] = useState(512);
   const [width, setWidth] = useState(512);
-
-  // Check if the device is mobile
   const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobileView(window.innerWidth <= 768);
-    };
+    const checkMobile = () => setIsMobileView(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -74,18 +69,18 @@ export default function Home() {
     }
   };
 
-  // GitHub Link Component - CENTERED AND ENLARGED
+  // GitHub Link Component
   const GitHubLink = () => (
     <a
       href="https://github.com/your-username"
       target="_blank"
       rel="noopener noreferrer"
-
+      className="fixed bottom-6 right-6 z-50 opacity-70 hover:opacity-100 transition-opacity"
       aria-label="View source on GitHub"
     >
       <div className="flex flex-col items-center">
-        <FaGithub className="text-gray-300 hover:text-white" size={48} />
-        <span className="text-lg font-medium text-gray-300 hover:text-white mb-2">github</span>
+        <FaGithub className="text-slate-400 hover:text-slate-200" size={28} />
+        <span className="text-xs text-slate-400 hover:text-slate-200 mt-1 font-mono">github</span>
       </div>
     </a>
   );
@@ -93,135 +88,137 @@ export default function Home() {
   // Mobile view
   if (isMobileView) {
     return (
-      <div className='bg-gray-700 h-screen'>
-        <div className="flex h-[90vh] items-center justify-center bg-gray-700 relative">
-        <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center mx-4">
-          <div className="bg-gray-100 border-2 border-dashed rounded-xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col">
+        <div className="flex-1 flex items-center justify-center p-4">
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
+            <div className="bg-slate-700/50 border-2 border-dashed border-slate-600 rounded-xl w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-slate-100 mb-3">Mobile Support Coming Soon</h1>
+            <p className="text-slate-400 leading-relaxed">
+              This application is optimized for desktop use. 
+              Mobile version is under active development.
+            </p>
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Mobile Version Coming Soon</h1>
-          <p className="text-gray-600 mb-6">
-            This application is currently under development for mobile devices.
-            Please use a desktop computer for now.
-          </p>
         </div>
-
-
-      </div><GitHubLink /></div>
+        <GitHubLink />
+      </div>
     );
   }
 
   // Desktop view
   return (
-    <div className='bg-gray-700'>
-      <div className="flex h-[90vh] flex-row items-center justify-center gap-6 bg-gray-700 relative">
-      {/* Frame to be downloaded */}
-      <div
-        ref={frameRef}
-        className="relative overflow-hidden rounded-3xl"
-        style={{ height: `${height}px`, width: `${width}px` }}
-      >
-        <img
-          src={selectedBackground}
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 z-10 flex items-center justify-center p-12">
-          <img
-            src={uploadedImage}
-            alt="Top image"
-            className="max-w-full max-h-full object-contain"
-            style={{
-              filter: 'drop-shadow(0 20px 25px rgba(0, 0, 0, 0.8))',
-              imageRendering: 'crisp-edges'
-            }} />
-        </div>
-      </div>
-
-      <div className="w-[40%] flex flex-col gap-4 items-center">
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          className="hidden" />
-
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium w-64"
-        >
-          Upload Image
-        </button>
-
-        <button
-          onClick={handleDownload}
-          className="px-6 py-3 bg-white text-gray-900 rounded-lg hover:bg-gray-100 transition-colors font-medium w-64"
-        >
-          Download Image
-        </button>
-
-        <div className="mt-4">
-          <p className="text-white mb-2 text-center">Select Background:</p>
-          <div className="flex gap-2 justify-center">
-            <button
-              onClick={() => setSelectedBackground('/backgrounds/background-1.jpg')}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex flex-col ">
+      <div className="flex-1 flex items-center justify-center p-6 ">
+        <div className="flex gap-8 w-full max-w-7xl align-center">
+          {/* Preview Frame */}
+          <div className="flex-1 flex justify-center ">
+            <div
+              ref={frameRef}
+              className="relative overflow-hidden rounded-2xl shadow-xl border border-slate-700/50"
+              style={{ height: `${height}px`, width: `${width}px`, background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)' }}
             >
-              BG 1
-            </button>
-            <button
-              onClick={() => setSelectedBackground('/backgrounds/background-2.jpg')}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
-            >
-              BG 2
-            </button>
-            <button
-              onClick={() => setSelectedBackground('/backgrounds/background-3.jpg')}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
-            >
-              BG 3
-            </button>
+              <img
+                src={selectedBackground}
+                alt="Background"
+                className="absolute inset-0 w-full h-full object-cover opacity-100"
+              />
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <img
+                  src={uploadedImage}
+                  alt="Top image"
+                  className="max-w-full max-h-full object-contain rounded-3xl"
+                  style={{
+                    filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))',
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
-          <input
-            ref={downloadInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleBackgroundUpload}
-            className="hidden" />
-          <button
-            onClick={() => downloadInputRef.current?.click()}
-            className="px-6 py-3 m-3.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium w-64"
-          >
-            Custom Background
-          </button>
+          {/* Controls Panel */}
+          <div className="w-80 flex flex-col gap-6">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-slate-100 mb-5 flex items-center gap-2">
+                <FaImage className="text-blue-400" /> Image Controls
+              </h2>
+              
+              <div className="space-y-4">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-xl transition-all duration-200 border border-slate-600 hover:border-slate-500"
+                >
+                  <FaUpload /> Upload Image
+                </button>
 
-          <p className="text-white mb-2 text-center">Select Aspect Ratio</p>
-          <div className="flex gap-2 justify-center">
-            <button
-              onClick={() => { setHeight(512); setWidth(512); }}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
-            >
-              1:1
-            </button>
-            <button
-              onClick={() => { setHeight(340); setWidth(600); }}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
-            >
-              16:9
-            </button>
-            <button
-              onClick={() => { setHeight(600); setWidth(340); }}
-              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500 transition-colors"
-            >
-              9:16
-            </button>
+                <button
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl transition-all duration-200 shadow-lg hover:shadow-blue-500/20"
+                >
+                  <FaDownload /> Download Image
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-slate-100 mb-4">Background</h2>
+              
+              <div className="space-y-3">
+                <div className="grid grid-cols-3 gap-2">
+                  {[1, 2, 3].map((num) => (
+                    <button
+                      key={num}
+                      onClick={() => setSelectedBackground(`/backgrounds/background-${num}.jpg`)}
+                      className={`px-3 py-2 text-sm rounded-lg transition-all ${
+                        selectedBackground === `/backgrounds/background-${num}.jpg`
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-slate-700 text-slate-200 hover:bg-slate-600'
+                      }`}
+                    >
+                      BG {num}
+                    </button>
+                  ))}
+                </div>
+                
+                <button
+                  onClick={() => downloadInputRef.current?.click()}
+                  className="w-full px-4 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-xl transition-all duration-200 border border-slate-600 hover:border-slate-500 mt-2"
+                >
+                  Custom Background
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-slate-100 mb-4">Aspect Ratio</h2>
+              
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { label: '1:1', h: 512, w: 512 },
+                  { label: '16:9', h: 340, w: 600 },
+                  { label: '9:16', h: 600, w: 340 }
+                ].map((ratio) => (
+                  <button
+                    key={ratio.label}
+                    onClick={() => { setHeight(ratio.h); setWidth(ratio.w); }}
+                    className={`px-3 py-2.5 text-sm rounded-lg transition-all ${
+                      height === ratio.h && width === ratio.w
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-slate-700 text-slate-200 hover:bg-slate-600'
+                    }`}
+                  >
+                    {ratio.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-
-    </div><GitHubLink /></div>
+      
+      <GitHubLink />
+    </div>
   );
 }
